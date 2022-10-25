@@ -9,8 +9,8 @@ db = sqlite3.connect('test.db',check_same_thread=False)
 sql = db.cursor()
 
 #токен
-bot = telebot.TeleBot("")
-selfid = 1111111111 #вставте свой id
+bot = telebot.TeleBot("5773248805:AAGOho4xQcUUimERLyXK6T4LsziXWpxwMDk")
+selfid = 1302569962 #вставте свой id
 def swet(r): #получение даты
 	time = datetime.datetime.today()
 	together = str(time)[:10]#age   month     day

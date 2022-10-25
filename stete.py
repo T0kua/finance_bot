@@ -80,13 +80,13 @@ def get():
 			vmns = font.render(mns, True,(255,255,255))
 			daz = font.render(str(days[n][0]),True,(0,0,0))
 			screen.blit(daz,[x + w/2,20])
-			if days[n][1] > days[n][2] :
+			if days[n][1] + days[n][2] > 0:
 							# red green blue
 				pygame.draw.rect(screen, (200,0,0) , (x,y,w,h1),0) #plus
 				screen.blit(vpls, [x + w/2,h1])
 				pygame.draw.rect(screen, (0,0,200) , (x,y,w,-h2),0) #munus
 				screen.blit(vmns,[x + w/2,-h2])
-			elif days[n][2] > days[n][1] :
+			elif days[n][2] +days[n][1] < 0:
 				pygame.draw.rect(screen, (0,0,200) , (x,y,w,-h2),0) #munus
 				screen.blit(vmns,[x + w/2,-h2])
 				pygame.draw.rect(screen, (200,0,0) , (x,y,w,h1),0) #plus
