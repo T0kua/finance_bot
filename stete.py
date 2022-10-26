@@ -5,6 +5,7 @@ import datetime
 import os
 from PIL import Image, ImageGrab
 pygame.init()
+
 def get():
 	div = (__file__[0:-8]) #путь к папке файлом
 	db = sqlite3.connect("test.db",check_same_thread=False)
@@ -20,6 +21,8 @@ def get():
 	date = str(time)[:10]#age   month     day
 	age = int(date[:4])
 	month = int(date[5:7])
+
+	screen_shot = 0
 	def flip():
 		pygame.display.flip()
 	List = []					
@@ -64,6 +67,11 @@ def get():
 			if event.type == pygame.QUIT:
 				exit()
 		screen.fill( (255,255,255))
+		ovalp = 0
+		ovalm = 0
+		for n in range(len(days)):
+			ovalm += days[n][2]
+			ovalp += days[n][1]
 		for n in range(len(days)):
 			y = 40
 			w = 450 / len(days) -1
@@ -80,6 +88,8 @@ def get():
 			vmns = font.render(mns, True,(255,255,255))
 			daz = font.render(str(days[n][0]),True,(0,0,0))
 			screen.blit(daz,[x + w/2,20])
+			oval = font.render(str(f"доход за месяц :{str(ovalp)}                        расход за месяц :{str(-ovalm)}"),True,(0,0,0))
+			screen.blit(oval,[20,450])
 			if days[n][1] + days[n][2] > 0:
 							# red green blue
 				pygame.draw.rect(screen, (200,0,0) , (x,y,w,h1),0) #plus
@@ -96,11 +106,12 @@ def get():
 	for i in range(100):
 		pygame.display.flip()
 		draw(days)
-
-	img = ImageGrab.grab()
-	img.save(f"{div}table.jpg","BMP")
-	im = Image.open(f'{div}table.jpg')
-	im.crop((600,300,1360,780)).save(f'{div}table.jpg', quality=95)
+	if screen_shot == 0 :
+		img = ImageGrab.grab()
+		img.save(f"{div}table.jpg","BMP")
+		im = Image.open(f'{div}table.jpg')
+		im.crop((600,300,1360,780)).save(f'{div}table.jpg', quality=95)
+		screen_shot = 1
 if __name__ == "__main__" :
 	while True:
 		for event in pygame.event.get():
